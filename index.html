@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dato antes que intuición — KOWEB</title>
+<meta name="description" content="Análisis de fuentes estratégicas para el plan de medios digitales de KOWEB Soluciones en Ingeniería. Plan de Medios Digitales · UNIMINUTO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#4ADE00; --verde-dim:#2db800; --verde-t:rgba(74,222,0,.12);
+  --negro:#080808; --negro-2:#101010; --negro-3:#171717; --linea:#242424;
+  --blanco:#ffffff; --gris:#8a8a84; --gris-claro:#c9c9c4;
+  --ambar:#f5b400; --rojo:#ff5a4f; --azul:#5ab4ff;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--negro);color:var(--blanco);font-family:'Inter',sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--verde)}
+
+/* ── NAV ── */
+.top{position:fixed;inset:0 0 auto 0;height:56px;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 28px;background:rgba(8,8,8,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea)}
+.brand{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:21px;letter-spacing:-.5px;white-space:nowrap}
+.brand em{font-style:normal;color:var(--verde)}
+.brand small{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gris);margin-left:10px;font-weight:400}
+.dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.dot{width:8px;height:8px;border-radius:50%;background:#333;border:0;transition:.2s}
+.dot.on{background:var(--verde);transform:scale(1.35)}
+.tools{display:flex;align-items:center;gap:10px}
+.counter{font-family:'Space Mono',monospace;font-size:11px;color:var(--gris);letter-spacing:2px;min-width:62px;text-align:right}
+.ibtn{background:var(--negro-3);border:1px solid var(--linea);border-radius:8px;height:32px;min-width:32px;padding:0 10px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--gris-claro);transition:.2s}
+.ibtn:hover{border-color:var(--verde);color:var(--verde)}
+.bar{position:fixed;top:56px;left:0;height:2px;background:var(--verde);z-index:49;transition:width .35s}
+
+/* ── SLIDES ── */
+.deck{position:fixed;inset:58px 0 0 0}
+.slide{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:48px 7vw 96px;opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .45s,transform .45s,visibility .45s}
+.slide.on{opacity:1;visibility:visible;transform:none}
+.slide.prev{transform:translateX(-40px)}
+.slide::before{content:'';position:fixed;right:-120px;top:50%;width:560px;height:560px;transform:translateY(-50%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cpolygon points='60,40 130,40 190,200 130,360 60,360 120,200' fill='%234ADE00' opacity='0.05'/%3E%3Cpolygon points='150,40 220,40 290,200 220,360 150,360 210,200' fill='%234ADE00' opacity='0.03'/%3E%3C/svg%3E") no-repeat center/contain;pointer-events:none;z-index:0}
+.slide>*{position:relative;z-index:1}
+.wrap{max-width:1180px;margin:0 auto}
+
+.eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--verde);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--verde)}
+h1,h2,h3{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:-.5px}
+h1{font-size:clamp(52px,8.5vw,108px);line-height:.92}
+h2{font-size:clamp(34px,4.6vw,58px);line-height:.98;margin-bottom:14px}
+h3{font-size:21px;font-weight:600;margin-bottom:8px}
+h1 em,h2 em{font-style:normal;color:var(--verde)}
+p{font-size:15px;line-height:1.7;color:var(--gris-claro)}
+.lead{max-width:760px;font-size:16px;margin-bottom:28px}
+.mono{font-family:'Space Mono',monospace}
+.cite{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--gris);letter-spacing:.3px}
+.card{background:var(--negro-2);border:1px solid var(--linea);border-radius:12px;padding:22px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:100px;border:1px solid rgba(74,222,0,.3);background:var(--verde-t);color:var(--verde)}
+.hint{font-family:'Space Mono',monospace;font-size:10px;color:var(--gris);letter-spacing:1px;margin-top:10px}
+.hint b{color:var(--verde);font-weight:400}
+
+/* ── PORTADA ── */
+.cover{display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:center;min-height:calc(100vh - 220px)}
+.cover-tag{margin-bottom:26px}
+.cover-sub{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gris);text-transform:uppercase;border-left:2px solid var(--verde);padding-left:16px;line-height:1.9;margin-top:26px}
+.cover-sub strong{color:var(--blanco);font-weight:400}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:13px;margin-top:18px}
+.meta dt{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--verde);text-transform:uppercase;padding-top:2px}
+.meta dd{color:var(--gris-claro)}
+.toc{margin-top:20px;display:grid;gap:6px}
+.toc button{display:flex;gap:12px;align-items:center;background:none;border:0;border-bottom:1px solid var(--linea);padding:8px 0;text-align:left;font-size:13.5px;color:var(--gris-claro);transition:.2s}
+.toc button span{font-family:'Space Mono',monospace;font-size:10px;color:var(--verde);min-width:22px}
+.toc button:hover{color:var(--verde);padding-left:6px}
+
+/* ── INTRO ── */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.two>*,.game>*,.ev>*,.gap>*,.sdet>*{min-width:0}
+.flips{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.flip{perspective:1000px;height:230px;background:none;border:0;text-align:left;padding:0}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.open .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:20px;display:flex;flex-direction:column;border:1px solid var(--linea)}
+.face.front{background:var(--negro-3)}
+.face.back{background:#0d1a06;border-color:rgba(74,222,0,.35);transform:rotateY(180deg)}
+.face small{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:12px}
+.face.back small{color:var(--verde)}
+.face p{font-size:14px;color:var(--blanco)}
+.face .big{font-family:'Rajdhani',sans-serif;font-size:44px;font-weight:700;color:var(--verde);line-height:1;margin-bottom:6px}
+.face .cite{margin-top:auto}
+.face .turn{margin-top:auto;font-family:'Space Mono',monospace;font-size:10px;color:var(--verde)}
+.sim{width:100%;height:auto;max-height:210px;display:block}
+.sim text{font-family:'Space Mono',monospace}
+.sim .n{cursor:pointer}
+.sim .n rect{transition:.2s}
+.sim .n:hover rect,.sim .n.on rect{stroke:var(--verde);fill:#0f1f07}
+.simbox{min-height:78px;margin-top:10px}
+
+/* ── CLASIFICACIÓN ── */
+.game{display:grid;grid-template-columns:1fr 2.1fr;gap:22px;align-items:start}
+.pool{display:flex;flex-direction:column;gap:8px}
+.chip{background:var(--negro-3);border:1px solid var(--linea);border-radius:10px;padding:11px 13px;font-size:13px;text-align:left;transition:.2s;line-height:1.35}
+.chip:hover{border-color:#444}
+.chip.sel{border-color:var(--verde);box-shadow:0 0 0 3px rgba(74,222,0,.15)}
+.chip .k{display:block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--gris);text-transform:uppercase;margin-bottom:3px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.col{background:var(--negro-2);border:1px dashed #333;border-radius:12px;padding:14px;min-height:320px;transition:.2s;display:flex;flex-direction:column;gap:8px}
+.col.ready{border-color:var(--verde);background:#0c1606;cursor:pointer}
+.col h3{font-size:19px;margin:0}
+.col .def{font-size:11.5px;color:var(--gris);line-height:1.5;margin-bottom:6px}
+.placed{border-radius:9px;padding:9px 11px;font-size:12.5px;line-height:1.35;border:1px solid}
+.placed.ok{border-color:rgba(74,222,0,.4);background:rgba(74,222,0,.07)}
+.placed.bad{border-color:rgba(255,90,79,.45);background:rgba(255,90,79,.08)}
+.placed .why{display:block;font-size:11px;color:var(--gris-claro);margin-top:5px}
+.placed.bad .why::before{content:'Revisar → ';color:var(--rojo);font-family:'Space Mono',monospace;font-size:10px}
+.score{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.score .mono{font-size:12px;color:var(--gris-claro)}
+
+/* ── EVALUACIÓN ── */
+.ev{display:grid;grid-template-columns:230px 1fr 1fr;gap:20px;align-items:start}
+.srcs{display:flex;flex-direction:column;gap:7px}
+.src{background:var(--negro-3);border:1px solid var(--linea);border-radius:10px;padding:10px 12px;text-align:left;font-size:13px;line-height:1.3;display:flex;justify-content:space-between;gap:8px;align-items:center;transition:.2s}
+.src.on{border-color:var(--verde);background:#0c1606}
+.src .tot{font-family:'Space Mono',monospace;font-size:11px;padding:2px 7px;border-radius:6px}
+.radar{width:100%;max-width:380px;display:block;margin:0 auto}
+.radar text{font-family:'Space Mono',monospace;font-size:10px;fill:var(--gris-claro)}
+.crit{display:flex;flex-direction:column;gap:12px}
+.crow label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+.crow label b{font-family:'Space Mono',monospace;color:var(--verde);font-weight:400}
+.crow input{width:100%;accent-color:var(--verde)}
+.crow p{font-size:11.5px;line-height:1.45;color:var(--gris);margin-top:3px}
+.verdict{margin-top:14px;padding:14px 16px;border-radius:10px;border:1px solid;font-size:13.5px;line-height:1.5}
+.v-ok{border-color:rgba(74,222,0,.4);background:rgba(74,222,0,.07)}
+.v-mid{border-color:rgba(245,180,0,.45);background:rgba(245,180,0,.07)}
+.v-low{border-color:rgba(255,90,79,.45);background:rgba(255,90,79,.07)}
+.verdict b{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px}
+
+/* ── HERRAMIENTAS ── */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{background:var(--negro-3);border:1px solid var(--linea);border-radius:100px;padding:8px 16px;font-size:13px;transition:.2s}
+.tab.on{background:var(--verde);border-color:var(--verde);color:#071000;font-weight:600}
+.pane{display:none}
+.pane.on{display:block;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.metric-sel{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.metric-sel button{background:none;border:1px solid var(--linea);border-radius:8px;padding:6px 11px;font-family:'Space Mono',monospace;font-size:10.5px;color:var(--gris-claro)}
+.metric-sel button.on{border-color:var(--verde);color:var(--verde)}
+.bars{display:flex;flex-direction:column;gap:14px}
+.brow .lbl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.brow .lbl b{font-family:'Space Mono',monospace;font-weight:400;color:var(--verde)}
+.track{height:12px;background:var(--negro-3);border-radius:6px;overflow:hidden}
+.fill{height:100%;background:var(--verde);border-radius:6px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.fill.alt{background:var(--verde-dim)}
+.fill.low{background:#4d4d48}
+.insight{border-left:3px solid var(--verde);padding:4px 0 4px 16px;margin-top:18px}
+.insight p{font-size:14px}
+.q{background:#050505;border:1px solid var(--linea);border-radius:10px;padding:14px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.7;color:#a9d98f;overflow-x:auto;white-space:pre}
+.form{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin:14px 0}
+.form label{display:flex;flex-direction:column;gap:5px;font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:1.5px;color:var(--gris);text-transform:uppercase}
+.form select{background:var(--negro-3);border:1px solid var(--linea);color:var(--blanco);border-radius:8px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:13px}
+.go{background:var(--verde);color:#071000;border:0;border-radius:8px;padding:9px 18px;font-weight:600;font-size:13px}
+.go:disabled{opacity:.5;cursor:wait}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
+.kpi{background:var(--negro-2);border:1px solid var(--linea);border-radius:12px;padding:16px}
+.kpi .v{font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;color:var(--verde);line-height:1.05;word-break:break-word}
+.kpi .l{font-size:11.5px;color:var(--gris);margin-top:4px;line-height:1.4}
+.kpi.warn .v{color:var(--ambar)}
+.status{font-family:'Space Mono',monospace;font-size:10.5px;color:var(--gris);margin-top:10px}
+.status.live{color:var(--verde)}
+.plan-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan-list .card{padding:16px}
+.plan-list h3{font-size:17px}
+.plan-list p{font-size:13px}
+.pill{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;padding:3px 8px;border-radius:6px;background:var(--negro-3);border:1px solid var(--linea);margin:3px 4px 0 0;color:var(--gris-claro)}
+
+/* ── HALLAZGOS ── */
+.gap{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:start}
+.gauge-row{display:flex;flex-direction:column;gap:16px}
+.gauge .lbl{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px}
+.gauge .lbl b{font-family:'Rajdhani',sans-serif;font-size:24px;color:var(--verde)}
+.gauge .track{height:16px}
+.findings{display:grid;gap:10px}
+.find{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:10px;background:var(--negro-2);border:1px solid var(--linea)}
+.find .n{font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;color:var(--verde);min-width:88px;line-height:1}
+.find p{font-size:13px;line-height:1.5}
+
+/* ── DATO → DECISIÓN ── */
+.map{display:grid;gap:10px}
+.mrow{display:grid;grid-template-columns:1.1fr 30px 1.1fr 30px .8fr;gap:0;align-items:stretch;background:var(--negro-2);border:1px solid var(--linea);border-radius:12px;overflow:hidden;cursor:pointer;transition:.2s}
+.mrow:hover,.mrow.on{border-color:var(--verde)}
+.mcell{padding:14px 16px;font-size:13px;line-height:1.45;color:var(--gris-claro)}
+.mcell small{display:block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--verde);text-transform:uppercase;margin-bottom:5px}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--verde);font-family:'Space Mono',monospace}
+.mdet{grid-column:1/-1;display:none;padding:0 16px 14px;font-size:12.5px;color:var(--gris);line-height:1.55;border-top:1px dashed var(--linea);padding-top:12px}
+.mrow.on .mdet{display:block}
+
+/* ── METODOLOGÍA ── */
+.steps{display:flex;gap:0;margin:8px 0 22px;position:relative}
+.steps::before{content:'';position:absolute;left:24px;right:24px;top:23px;height:2px;background:var(--linea)}
+.step{flex:1;background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;padding:0 6px}
+.step .c{width:48px;height:48px;border-radius:50%;background:var(--negro-3);border:2px solid var(--linea);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;transition:.25s}
+.step span{font-size:12.5px;color:var(--gris);text-align:center;line-height:1.3}
+.step.done .c{border-color:var(--verde-dim);color:var(--verde)}
+.step.on .c{background:var(--verde);border-color:var(--verde);color:#071000;transform:scale(1.1)}
+.step.on span{color:var(--blanco)}
+.sdet{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+.sdet ul{list-style:none;display:grid;gap:8px;margin-top:10px}
+.sdet li{font-size:13.5px;color:var(--gris-claro);line-height:1.5;padding-left:18px;position:relative}
+.sdet li::before{content:'›';position:absolute;left:2px;color:var(--verde);font-weight:700}
+.gantt{display:grid;gap:7px;margin-top:6px}
+.g{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;font-size:11.5px;color:var(--gris)}
+.g .t{display:grid;grid-template-columns:repeat(8,1fr);gap:3px}
+.g .t i{height:12px;border-radius:3px;background:var(--negro-3)}
+.g .t i.x{background:var(--verde-dim)}
+.g.hl .t i.x{background:var(--verde)}
+.g.hl{color:var(--blanco)}
+
+/* ── CIERRE ── */
+.concl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.concl .card{border-top:3px solid var(--verde)}
+.concl .num{font-family:'Space Mono',monospace;font-size:11px;color:var(--verde);margin-bottom:10px}
+.concl p{font-size:14px}
+.stance{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stance .card p{font-size:14px}
+.quote{font-family:'Rajdhani',sans-serif;font-size:clamp(24px,2.8vw,34px);font-weight:600;line-height:1.15;margin-top:26px;max-width:900px}
+.quote em{font-style:normal;color:var(--verde)}
+
+/* ── BIBLIOGRAFÍA ── */
+.refs{display:grid;gap:12px;max-width:980px}
+.ref{font-size:13.5px;line-height:1.65;color:var(--gris-claro);padding-left:36px;text-indent:-36px}
+.ref i{color:var(--blanco)}
+.ref a{word-break:break-all;font-size:12.5px}
+.rgroup{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--verde);text-transform:uppercase;margin:18px 0 4px}
+.foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--linea);font-family:'Space Mono',monospace;font-size:10px;color:var(--gris);letter-spacing:1px;line-height:1.8}
+
+/* ── NAV INFERIOR / OVERLAY ── */
+.pager{position:fixed;bottom:18px;right:24px;z-index:40;display:flex;gap:8px}
+.pager button{width:44px;height:44px;border-radius:50%;background:var(--negro-3);border:1px solid var(--linea);font-size:18px;transition:.2s}
+.pager button:hover{border-color:var(--verde);color:var(--verde)}
+.keys{position:fixed;bottom:28px;left:28px;z-index:40;font-family:'Space Mono',monospace;font-size:9.5px;color:#555;letter-spacing:1px}
+.keys kbd{border:1px solid #333;border-radius:4px;padding:1px 5px;color:#888;font-family:inherit}
+.ov{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px}
+.ov.on{display:flex}
+.ov-box{background:var(--negro-2);border:1px solid var(--linea);border-radius:16px;padding:28px;max-width:720px;width:100%;max-height:90vh;overflow:auto}
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.ov-grid button{background:var(--negro-3);border:1px solid var(--linea);border-radius:10px;padding:12px 14px;text-align:left;font-size:13.5px;display:flex;gap:10px}
+.ov-grid button span{font-family:'Space Mono',monospace;font-size:10px;color:var(--verde);padding-top:2px}
+.ov-grid button:hover{border-color:var(--verde)}
+
+/* ── RESPONSIVE ── */
+@media (max-width:980px){
+  .cover,.two,.game,.ev,.gap,.sdet,.stance{grid-template-columns:1fr}
+  .cover{gap:30px;min-height:0}
+  .flips,.concl{grid-template-columns:1fr}
+  .flip{height:190px}
+  .kpis{grid-template-columns:1fr 1fr}
+  .plan-list{grid-template-columns:1fr}
+  .mrow{grid-template-columns:1fr;}
+  .arrow{padding:0;height:18px;transform:rotate(90deg)}
+  .dots{display:none}
+  .brand small{display:none}
+  .keys{display:none}
+}
+@media (max-width:640px){
+  .slide{padding:30px 16px 100px}
+  .cols{grid-template-columns:1fr}
+  .col{min-height:0}
+  .top{padding:0 14px}
+  .step span{font-size:10.5px}
+  .steps::before{left:18px;right:18px}
+  .step .c{width:38px;height:38px;font-size:11px}
+  .ov-grid{grid-template-columns:1fr}
+  .ibtn.hide-sm{display:none}
+}
+@media print{
+  body{overflow:visible}
+  .top,.bar,.pager,.keys{display:none}
+  .deck{position:static}
+  .slide{position:relative;opacity:1;visibility:visible;transform:none;page-break-after:always;overflow:visible}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <span class="brand">KO<em>W</em>EB<small>FUENTES ESTRATÉGICAS</small></span>
+  <nav class="dots" id="dots" aria-label="Diapositivas"></nav>
+  <div class="tools">
+    <button class="ibtn" id="btnIndex" title="Índice (tecla I)">ÍNDICE</button>
+    <button class="ibtn hide-sm" id="btnFull" title="Pantalla completa (tecla F)">⛶</button>
+    <span class="counter" id="counter">00 / 09</span>
+  </div>
+</header>
+<div class="bar" id="bar"></div>
+
+<main class="deck" id="deck">
+
+<!-- ═════════ PORTADA ═════════ -->
+<section class="slide" data-title="Portada">
+ <div class="wrap cover">
+  <div>
+   <div class="tag cover-tag">● Plan de Medios Digitales · Presentación ejecutiva</div>
+   <h1>Dato antes<br>que <em>intuición</em></h1>
+   <p class="lead" style="margin-top:22px">Análisis de fuentes estratégicas para construir el plan de medios digitales de <strong style="color:#fff">KOWEB Soluciones en Ingeniería</strong>, una marca que vende tecnología al sector público colombiano.</p>
+   <div class="cover-sub">
+    <strong>David Fernando Delgado Nichoy</strong><br>
+    Corporación Universitaria Minuto de Dios · UNIMINUTO<br>
+    Docente: David Reinaldo Jojoa Niño · 2026
+   </div>
+  </div>
+  <div>
+   <svg viewBox="0 0 340 80" style="max-width:300px;width:100%" role="img" aria-label="Logo KOWEB">
+    <polygon points="4,6 18,6 30,40 18,74 4,74 16,40" fill="#4ADE00"/>
+    <polygon points="20,6 34,6 52,40 34,74 20,74 38,40" fill="#4ADE00" opacity=".45"/>
+    <text x="62" y="56" font-family="Rajdhani,sans-serif" font-weight="700" font-size="52" fill="#fff" letter-spacing="-1">KO</text>
+    <text x="148" y="56" font-family="Rajdhani,sans-serif" font-weight="700" font-size="52" fill="#4ADE00" letter-spacing="-1">W</text>
+    <text x="193" y="56" font-family="Rajdhani,sans-serif" font-weight="700" font-size="52" fill="#fff" letter-spacing="-1">EB</text>
+    <text x="63" y="73" font-family="Space Mono,monospace" font-size="9" fill="#4ADE00" letter-spacing="2.5">SOLUCIONES · INGENIERÍA</text>
+   </svg>
+   <div class="card" style="margin-top:20px">
+    <div class="eyebrow" style="margin-bottom:4px">Recorrido</div>
+    <div class="toc" id="toc"></div>
+   </div>
+   <p class="hint">Navega con <b>← →</b>, los puntos superiores o el botón <b>ÍNDICE</b>. Todo lo verde se puede tocar.</p>
+  </div>
+ </div>
+</section>
+
+<!-- ═════════ 01 INTRODUCCIÓN ═════════ -->
+<section class="slide" data-title="Introducción">
+ <div class="wrap">
+  <div class="eyebrow">01 — Introducción</div>
+  <h2>¿Por qué una marca necesita <em>fuentes</em>, no corazonadas?</h2>
+  <p class="lead">KOWEB desarrolla software para alcaldías y gobernaciones. Su comprador no decide por impulso: decide con comité, asesoría jurídica y miedo a un hallazgo fiscal. Planear medios para ese público con suposiciones es el camino más corto a gastar mal. Por eso el marketing necesita procesos de información continuos, no acciones aisladas (Canossa Montes de Oca, 2019).</p>
+  <div class="two">
+   <div>
+    <h3>Tres creencias que el dato corrige <span class="cite">— toca cada tarjeta</span></h3>
+    <div class="flips" id="flips"></div>
+   </div>
+   <div>
+    <h3>El sistema de información de marketing (SIM)</h3>
+    <p style="font-size:13.5px">Las fuentes alimentan un ciclo, no un informe único. Toca cada fase para ver cómo funciona en KOWEB.</p>
+    <svg class="sim" viewBox="0 0 440 250" id="sim" role="img" aria-label="Ciclo del sistema de información de marketing">
+     <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#2db800"/></marker></defs>
+     <path d="M150 45 H290" stroke="#2db800" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+     <path d="M372 70 V175" stroke="#2db800" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+     <path d="M290 205 H150" stroke="#2db800" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+     <path d="M68 180 V75" stroke="#2db800" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+     <g class="n" data-i="0"><rect x="4" y="20" width="140" height="50" rx="10" fill="#171717" stroke="#2a2a2a"/><text x="74" y="42" text-anchor="middle" fill="#4ADE00" font-size="10">01</text><text x="74" y="58" text-anchor="middle" fill="#fff" font-size="11">Fuentes</text></g>
+     <g class="n" data-i="1"><rect x="296" y="20" width="140" height="50" rx="10" fill="#171717" stroke="#2a2a2a"/><text x="366" y="42" text-anchor="middle" fill="#4ADE00" font-size="10">02</text><text x="366" y="58" text-anchor="middle" fill="#fff" font-size="11">Validación</text></g>
+     <g class="n" data-i="2"><rect x="296" y="180" width="140" height="50" rx="10" fill="#171717" stroke="#2a2a2a"/><text x="366" y="202" text-anchor="middle" fill="#4ADE00" font-size="10">03</text><text x="366" y="218" text-anchor="middle" fill="#fff" font-size="11">Decisión de medios</text></g>
+     <g class="n" data-i="3"><rect x="4" y="180" width="140" height="50" rx="10" fill="#171717" stroke="#2a2a2a"/><text x="74" y="202" text-anchor="middle" fill="#4ADE00" font-size="10">04</text><text x="74" y="218" text-anchor="middle" fill="#fff" font-size="11">Medición</text></g>
+     <text x="220" y="118" text-anchor="middle" fill="#888" font-size="10">SIM · KOWEB</text>
+     <text x="220" y="136" text-anchor="middle" fill="#555" font-size="9">ciclo continuo</text>
+    </svg>
+    <div class="card simbox" id="simbox"><p style="font-size:13.5px">Selecciona una fase del ciclo.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ═════════ 02 CLASIFICACIÓN ═════════ -->
+<section class="slide" data-title="Clasificación de fuentes">
+ <div class="wrap">
+  <div class="eyebrow">02 — Clasificación</div>
+  <h2>Primarias, secundarias y <em>terciarias</em> para KOWEB</h2>
+  <p class="lead">Una fuente es <b style="color:#fff">primaria</b> si KOWEB genera el dato; <b style="color:#fff">secundaria</b> si otro lo produjo y KOWEB lo analiza; <b style="color:#fff">terciaria</b> si solo sirve para encontrar las otras. Selecciona una fuente y luego la columna donde crees que va.</p>
+  <div class="game">
+   <div>
+    <div class="pool" id="pool"></div>
+   </div>
+   <div>
+    <div class="cols" id="cols">
+     <div class="col" data-c="p"><h3>Primarias</h3><div class="def">Datos originales que KOWEB recoge de su propio público.</div></div>
+     <div class="col" data-c="s"><h3>Secundarias</h3><div class="def">Datos o análisis producidos por terceros sobre el sector.</div></div>
+     <div class="col" data-c="t"><h3>Terciarias</h3><div class="def">Catálogos, directorios y bases que remiten a otras fuentes.</div></div>
+    </div>
+    <div class="score">
+     <span class="mono" id="scoreTxt">0 / 12 clasificadas</span>
+     <button class="ibtn" id="btnSolve">VER SOLUCIÓN</button>
+     <button class="ibtn" id="btnReset">REINICIAR</button>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ═════════ 03 EVALUACIÓN ═════════ -->
+<section class="slide" data-title="Evaluación de confiabilidad">
+ <div class="wrap">
+  <div class="eyebrow">03 — Confiabilidad</div>
+  <h2>Seis fuentes bajo <em>cinco criterios</em></h2>
+  <p class="lead">Cada fuente se califica de 1 a 5 en autoridad, actualidad, precisión, propósito y cobertura, criterios clásicos para evaluar información en línea (Kapoun, 1998). El puntaje es mío y está justificado; mueve los controles para ver cómo cambiaría el veredicto con otro criterio.</p>
+  <div class="ev">
+   <div class="srcs" id="srcs"></div>
+   <div>
+    <svg class="radar" id="radar" viewBox="0 0 360 340" role="img" aria-label="Gráfico radar de los cinco criterios"></svg>
+    <div class="verdict" id="verdict"></div>
+   </div>
+   <div class="crit" id="crit"></div>
+  </div>
+ </div>
+</section>
+
+<!-- ═════════ 04 HERRAMIENTAS ═════════ -->
+<section class="slide" data-title="Herramientas cuantitativas">
+ <div class="wrap">
+  <div class="eyebrow">04 — Herramientas</div>
+  <h2>Medir el <em>sector</em> cuando la marca aún no tiene tráfico</h2>
+  <p class="lead">KOWEB aún no tiene sitio publicado, así que las herramientas se usan donde ya está su público: los portales de contratación que visita a diario y los datos abiertos de lo que compra.</p>
+  <div class="tabs" id="tabs">
+   <button class="tab on" data-p="sw">SimilarWeb</button>
+   <button class="tab" data-p="secop">Datos abiertos SECOP II · en vivo</button>
+   <button class="tab" data-p="ga">Google Analytics 4</button>
+   <button class="tab" data-p="sem">SEMrush</button>
+  </div>
+
+  <div class="pane on" id="p-sw">
+   <div class="two">
+    <div>
+     <div class="metric-sel" id="swSel">
+      <button class="on" data-m="dur">Duración media</button>
+      <button data-m="ppv">Páginas por visita</button>
+      <button data-m="bounce">Tasa de rebote</button>
+     </div>
+     <div class="bars" id="swBars"></div>
+     <p class="cite" style="margin-top:14px">Fuente: Similarweb (2026a, 2026b, 2026c). Datos de agosto de 2026, consultados el 28/09/2026.</p>
+    </div>
+    <div>
+     <div class="findings">
+      <div class="find"><div class="n">72,69%</div><p>del tráfico del portal de Colombia Compra llega por <b style="color:#fff">búsqueda orgánica</b>. El público busca, no navega redes (Similarweb, 2026a).</p></div>
+      <div class="find"><div class="n">35,59%</div><p>del tráfico de la plataforma SECOP II es <b style="color:#fff">directo</b>, con palabras clave como «secop ii login»: es una herramienta de trabajo diaria (Similarweb, 2026b).</p></div>
+      <div class="find"><div class="n">12 s</div><p>dura la visita media en un agregador privado de licitaciones. Tráfico que no se queda: mal lugar para pautar (Similarweb, 2026c).</p></div>
+     </div>
+    </div>
+   </div>
+   <div class="insight"><p><b style="color:#fff">Límite de la herramienta:</b> SimilarWeb estima con paneles y modelos; en sitios pequeños el margen de error crece. Sirve para comparar órdenes de magnitud y comportamiento, no para reportar cifras exactas.</p></div>
+  </div>
+
+  <div class="pane" id="p-secop">
+   <div class="two">
+    <div>
+     <p style="font-size:14px">Esta consulta se ejecuta <b style="color:#fff">en vivo</b> contra la API pública de datos.gov.co (conjunto «SECOP II – Contratos electrónicos»). Muestra cuánto contrata el mercado objetivo de KOWEB.</p>
+     <div class="form">
+      <label>Departamento<select id="qDep"><option>Nariño</option><option>Cauca</option><option>Putumayo</option><option>Valle del Cauca</option><option>Huila</option></select></label>
+      <label>Año de firma<select id="qYear"><option>2025</option><option>2024</option><option>2023</option></select></label>
+      <label>Objeto contiene<select id="qKey"><option value="">Todos los contratos</option><option value="SOFTWARE">«software»</option><option value="PLATAFORMA">«plataforma»</option><option value="SISTEMA DE INFORMACI">«sistema de información»</option><option value="PAGINA WEB">«página web»</option></select></label>
+      <button class="go" id="qGo">Consultar</button>
+     </div>
+     <div class="q" id="qTxt"></div>
+    </div>
+    <div>
+     <div class="kpis" id="kpis" style="grid-template-columns:1fr 1fr"></div>
+     <div class="status" id="qStatus"></div>
+    </div>
+   </div>
+   <div class="insight"><p><b style="color:#fff">Lectura crítica:</b> en la consulta de referencia (Nariño, 2025) la suma de valores superó los $945 billones, más que todo el Presupuesto General de la Nación. No es un gasto real: son valores digitados con errores. Autoridad máxima no garantiza precisión; antes de usar montos hay que filtrar atípicos y trabajar con conteos o medianas.</p></div>
+  </div>
+
+  <div class="pane" id="p-ga">
+   <p style="font-size:14px;margin-bottom:14px">Sin sitio publicado no hay datos que leer, pero sí una <b style="color:#fff">medición que diseñar antes del lanzamiento</b>. Así se configura GA4 para que responda preguntas del plan de medios:</p>
+   <div class="plan-list">
+    <div class="card"><h3>Eventos de conversión</h3><p>solicitar_demo, descargar_guia_secop, clic_whatsapp, envio_formulario. La métrica rectora es la solicitud de demo, no la visita.</p><span class="pill">Conversiones</span><span class="pill">Embudo</span></div>
+    <div class="card"><h3>Adquisición con UTM</h3><p>Cada enlace de LinkedIn, correo o boletín lleva utm_source y utm_campaign para saber qué canal trae decisores y no solo clics.</p><span class="pill">Fuente / medio</span><span class="pill">Campaña</span></div>
+    <div class="card"><h3>Audiencia institucional</h3><p>Dimensión personalizada «tipo de entidad» (alcaldía, gobernación, descentralizada) capturada en formularios, para segmentar el embudo por cliente real.</p><span class="pill">Dimensión personalizada</span></div>
+    <div class="card"><h3>Contenido que convierte</h3><p>Informe de páginas de destino cruzado con conversiones: qué tutorial de SECOP II o caso de éxito lleva a pedir una demo.</p><span class="pill">Páginas de destino</span><span class="pill">Engagement</span></div>
+   </div>
+  </div>
+
+  <div class="pane" id="p-sem">
+   <p style="font-size:14px;margin-bottom:14px">SEMrush entra en la fase de contenidos: valida volumen y dificultad de las búsquedas que ya detectó SimilarWeb. Estos son los grupos de palabras clave a medir; el volumen se registra en la consulta, no se supone.</p>
+   <div class="plan-list">
+    <div class="card"><h3>Intención de ayuda</h3><p>«cómo publicar en secop ii», «modificación contractual secop ii», «error secop ii». El funcionario busca resolver un problema hoy.</p><span class="pill">Keyword Magic Tool</span><span class="pill">Volumen · KD</span></div>
+    <div class="card"><h3>Intención de solución</h3><p>«software contratación pública», «sistema de gestión contractual alcaldía». Menor volumen, mayor valor comercial.</p><span class="pill">Intención comercial</span></div>
+    <div class="card"><h3>Competencia</h3><p>Dominios que posicionan para esos términos: consultoras, proveedores de software público y portales oficiales.</p><span class="pill">Organic Research</span><span class="pill">Keyword Gap</span></div>
+    <div class="card"><h3>Límite a declarar</h3><p>Para nichos B2G locales, las bases de SEMrush pueden subestimar volúmenes. Se contrasta con Google Search Console una vez publicado el sitio.</p><span class="pill">Triangulación</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ═════════ 05 HALLAZGOS ═════════ -->
+<section class="slide" data-title="Hallazgos del mercado">
+ <div class="wrap">
+  <div class="eyebrow">05 — Hallazgos</div>
+  <h2>La brecha está en las <em>alcaldías</em></h2>
+  <p class="lead">Cruzar fuentes oficiales muestra dónde está la necesidad. En la medición 2025 de la política de Gobierno Digital, las gobernaciones promediaron 82,4 puntos; las alcaldías, 65,47 (Portafolio, 2026). Ahí está el cliente con más por resolver.</p>
+  <div class="gap">
+   <div class="card">
+    <h3>Desempeño en Gobierno Digital 2025 <span class="cite">(puntos sobre 100)</span></h3>
+    <div class="gauge-row" id="gauges" style="margin-top:16px"></div>
+    <p class="cite" style="margin-top:14px">Fuente: Función Pública, reportado por Portafolio (2026).</p>
+   </div>
+   <div class="card">
+    <h3>Conectividad del entorno</h3>
+    <div class="gauge-row" id="gauges2" style="margin-top:16px"></div>
+    <p class="cite" style="margin-top:14px">Fuente: DANE (2025), ENTIC Hogares 2024. Personas de 5 años y más que usaron internet.</p>
+   </div>
+  </div>
+  <div class="insight"><p>Suominen (2020) mostró que las pymes latinoamericanas que venden en línea exportan mucho más que las que no (67% frente a 18% en su encuesta). Para KOWEB la lección es análoga: la presencia digital amplía el mercado más allá de Pasto, pero solo si el canal está donde el comprador busca.</p></div>
+ </div>
+</section>
+
+<!-- ═════════ 06 DEL DATO A LA DECISIÓN ═════════ -->
+<section class="slide" data-title="Del dato a la decisión">
+ <div class="wrap">
+  <div class="eyebrow">06 — Aplicación al plan de medios</div>
+  <h2>Del dato a la <em>decisión</em></h2>
+  <p class="lead">Un dato solo vale si cambia una decisión. Cada fila une un hallazgo validado con una acción del plan y el indicador que dirá si funcionó. Toca una fila para ver la fuente y el riesgo.</p>
+  <div class="map" id="map"></div>
+ </div>
+</section>
+
+<!-- ═════════ 07 METODOLOGÍA ═════════ -->
+<section class="slide" data-title="Metodología de investigación">
+ <div class="wrap">
+  <div class="eyebrow">07 — Metodología</div>
+  <h2>Una investigación <em>mixta</em> en cinco pasos</h2>
+  <p class="lead">Diseño secuencial exploratorio: primero escuchar al funcionario (cualitativo), luego medir si lo escuchado se repite (cuantitativo). Recorre los pasos.</p>
+  <div class="steps" id="steps"></div>
+  <div class="sdet">
+   <div class="card" id="stepBox"></div>
+   <div class="card">
+    <h3 style="font-size:17px">Cronograma · 8 semanas</h3>
+    <div class="gantt" id="gantt"></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ═════════ 08 CIERRE ═════════ -->
+<section class="slide" data-title="Cierre">
+ <div class="wrap">
+  <div class="eyebrow">08 — Cierre</div>
+  <h2>Conclusiones y <em>postura</em></h2>
+  <div class="concl">
+   <div class="card"><div class="num">01 · CONFIABILIDAD</div><p>La confiabilidad no es binaria. SECOP II es la fuente con más autoridad del sector y aun así contiene valores imposibles. Ninguna fuente se usa sin validar, ni siquiera la oficial.</p></div>
+   <div class="card"><div class="num">02 · HERRAMIENTAS</div><p>SimilarWeb y SEMrush miden el sector, no a KOWEB. Para una marca nueva la fuente primaria (entrevistas, encuesta y luego GA4) es insustituible: nadie más tiene ese dato.</p></div>
+   <div class="card"><div class="num">03 · DECISIÓN</div><p>El plan de medios de KOWEB no empieza en redes sociales sino en búsqueda y contenido útil sobre SECOP II, dirigido a alcaldías, porque ahí se cruzan la necesidad y el hábito digital.</p></div>
+  </div>
+  <div class="stance">
+   <div class="card" style="border-color:rgba(245,180,0,.4)">
+    <h3 style="font-size:17px;color:var(--ambar)">Aplicando el criterio a la propia guía</h3>
+    <p>La pregunta orientadora afirma que el 73% de las decisiones de marketing digital fallan por fuentes no validadas, pero no indica de qué estudio sale. Con los criterios de esta presentación, ese dato falla en autoridad y precisión: no lo usaría para justificar una inversión, aunque la idea de fondo sea razonable.</p>
+   </div>
+   <div class="card">
+    <h3 style="font-size:17px">Reflexión</h3>
+    <p>En el sector público el error de fuente no es solo un mal gasto de pauta: es un mensaje que pierde credibilidad ante un comprador que vive auditado. Para KOWEB, citar bien es parte de la marca.</p>
+   </div>
+  </div>
+  <p class="quote">Una marca que le vende <em>certeza</em> al Estado no puede planear sus medios con <em>suposiciones</em>.</p>
+ </div>
+</section>
+
+<!-- ═════════ BIBLIOGRAFÍA ═════════ -->
+<section class="slide" data-title="Referencias">
+ <div class="wrap">
+  <div class="eyebrow">Fuentes</div>
+  <h2>Referencias</h2>
+  <p class="cite" style="margin-bottom:6px">Formato APA 7.ª edición.</p>
+  <div class="refs">
+   <div class="rgroup">Recursos básicos del curso</div>
+   <p class="ref">Canossa Montes de Oca, H. (2019). Sistemas de información de marketing en la planificación estratégica de la era digital. <i>Redmarka. Revista de Marketing Aplicado, 23</i>(2), 43–60. <a href="https://doi.org/10.17979/redma.2019.23.2.5708" target="_blank" rel="noopener">https://doi.org/10.17979/redma.2019.23.2.5708</a></p>
+   <p class="ref">Suominen, K. (2020). <i>El comercio digital en América Latina: ¿qué desafíos enfrentan las empresas y cómo superarlos?</i> (Serie Comercio Internacional, 145, LC/TS.2019/76). Comisión Económica para América Latina y el Caribe (CEPAL). <a href="https://repositorio.cepal.org/handle/11362/44976" target="_blank" rel="noopener">https://repositorio.cepal.org/handle/11362/44976</a></p>
+   <div class="rgroup">Fuentes de datos</div>
+   <p class="ref">Agencia Nacional de Contratación Pública – Colombia Compra Eficiente. (2026). <i>SECOP II – Contratos electrónicos</i> [Conjunto de datos]. Datos Abiertos Colombia. <a href="https://www.datos.gov.co/Estad-sticas-Nacionales/SECOP-II-Contratos-Electr-nicos/jbjy-vk9h" target="_blank" rel="noopener">https://www.datos.gov.co/Estad-sticas-Nacionales/SECOP-II-Contratos-Electr-nicos/jbjy-vk9h</a></p>
+   <p class="ref">Departamento Administrativo Nacional de Estadística. (2025). <i>Encuesta de Tecnologías de la Información y las Comunicaciones en Hogares (ENTIC Hogares) 2024</i> [Boletín técnico]. DANE. <a href="https://www.dane.gov.co/files/operaciones/ENTIC/bol-ENTICHogares-2024.pdf" target="_blank" rel="noopener">https://www.dane.gov.co/files/operaciones/ENTIC/bol-ENTICHogares-2024.pdf</a></p>
+   <p class="ref">Portafolio. (2026, 24 de julio). Solo 10 gobernaciones superaron los 90 puntos en transformación digital: así quedó el ranking. <i>Portafolio</i>. <a href="https://www.portafolio.co/economia/gobierno/solo-10-gobernaciones-superaron-los-90-puntos-en-transformacion-digital-asi-quedo-el-ranking-498915" target="_blank" rel="noopener">https://www.portafolio.co/economia/gobierno/solo-10-gobernaciones-superaron-los-90-puntos-en-transformacion-digital-asi-quedo-el-ranking-498915</a></p>
+   <p class="ref">Similarweb. (2026a). <i>colombiacompra.gov.co: Traffic and engagement analysis</i> [Datos de agosto de 2026]. Recuperado el 28 de septiembre de 2026, de <a href="https://www.similarweb.com/website/colombiacompra.gov.co/" target="_blank" rel="noopener">https://www.similarweb.com/website/colombiacompra.gov.co/</a></p>
+   <p class="ref">Similarweb. (2026b). <i>community.secop.gov.co: Traffic and engagement analysis</i> [Datos de agosto de 2026]. Recuperado el 28 de septiembre de 2026, de <a href="https://www.similarweb.com/website/community.secop.gov.co/" target="_blank" rel="noopener">https://www.similarweb.com/website/community.secop.gov.co/</a></p>
+   <p class="ref">Similarweb. (2026c). <i>licitacionescolombia.co: Traffic and engagement analysis</i> [Datos de agosto de 2026]. Recuperado el 28 de septiembre de 2026, de <a href="https://www.similarweb.com/website/licitacionescolombia.co/" target="_blank" rel="noopener">https://www.similarweb.com/website/licitacionescolombia.co/</a></p>
+   <div class="rgroup">Fuentes complementarias</div>
+   <p class="ref">Kapoun, J. (1998). Teaching undergrads WEB evaluation: A guide for library instruction. <i>College &amp; Research Libraries News, 59</i>(7), 522–523.</p>
+   <p class="ref">Merlos, E., y Acosta, B. (2021). <i>Manual de marketing digital para emprendedores</i> (pp. 1–119). Red Interinstitucional para el Desarrollo Territorial.</p>
+  </div>
+  <div class="foot">
+   Presentación ejecutiva · Análisis de fuentes estratégicas · Plan de Medios Digitales · UNIMINUTO<br>
+   David Fernando Delgado Nichoy · Docente: David Reinaldo Jojoa Niño · 2026<br>
+   © 2026 KOWEB Soluciones en Ingeniería. Las marcas de terceros citadas se mencionan con fines académicos.
+  </div>
+ </div>
+</section>
+
+</main>
+
+<div class="pager"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Siguiente">→</button></div>
+<div class="keys"><kbd>←</kbd> <kbd>→</kbd> navegar · <kbd>I</kbd> índice · <kbd>F</kbd> pantalla completa</div>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="Índice">
+ <div class="ov-box">
+  <div class="eyebrow">Índice</div>
+  <h2 style="font-size:36px">Ir a…</h2>
+  <div class="ov-grid" id="ovGrid"></div>
+ </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
+function fmt(n,d){return Number(n).toLocaleString('es-CO',{maximumFractionDigits:d||0,minimumFractionDigits:d||0})}
+
+/* ═════════ NAVEGACIÓN ═════════ */
+var slides=$$('.slide'), cur=0, total=slides.length;
+var dots=$('#dots'), toc=$('#toc'), ovGrid=$('#ovGrid');
+slides.forEach(function(s,i){
+  var d=el('button','dot');d.title=s.dataset.title;d.setAttribute('aria-label',s.dataset.title);
+  d.onclick=function(){go(i)};dots.appendChild(d);
+  var n=(i<10?'0':'')+i;
+  var b=el('button',null,'<span>'+n+'</span>'+s.dataset.title);b.onclick=function(){go(i);closeOv()};ovGrid.appendChild(b);
+  if(i>0){var t=el('button',null,'<span>'+n+'</span>'+s.dataset.title);t.onclick=function(){go(i)};toc.appendChild(t)}
+});
+function go(i){
+  if(i<0||i>=total)return;
+  slides.forEach(function(s,k){s.classList.toggle('on',k===i);s.classList.toggle('prev',k<i)});
+  $$('.dot').forEach(function(d,k){d.classList.toggle('on',k===i)});
+  cur=i;
+  $('#counter').textContent=(i<10?'0':'')+i+' / '+(total-1<10?'0':'')+(total-1);
+  $('#bar').style.width=(i/(total-1)*100)+'%';
+  slides[i].scrollTop=0;
+  try{history.replaceState(null,'','#'+i)}catch(e){}
+  if(slides[i].dataset.title==='Hallazgos del mercado')animGauges();
+}
+$('#prev').onclick=function(){go(cur-1)};
+$('#next').onclick=function(){go(cur+1)};
+var ov=$('#ov');
+function closeOv(){ov.classList.remove('on')}
+$('#btnIndex').onclick=function(){ov.classList.add('on')};
+ov.onclick=function(e){if(e.target===ov)closeOv()};
+function full(){
+  if(!document.fullscreenElement){(document.documentElement.requestFullscreen||function(){}).call(document.documentElement)}
+  else if(document.exitFullscreen){document.exitFullscreen()}
+}
+$('#btnFull').onclick=full;
+document.addEventListener('keydown',function(e){
+  var t=e.target.tagName;if(t==='INPUT'||t==='SELECT')return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'){go(cur+1)}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(cur-1)}
+  else if(e.key==='Home'){go(0)}
+  else if(e.key==='End'){go(total-1)}
+  else if(e.key==='i'||e.key==='I'){ov.classList.toggle('on')}
+  else if(e.key==='f'||e.key==='F'){full()}
+  else if(e.key==='Escape'){closeOv()}
+});
+var tx=null,ty=null;
+document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',function(e){
+  if(tx===null)return;var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.6){go(cur+(dx<0?1:-1))}tx=null;
+},{passive:true});
+
+/* ═════════ 01 · TARJETAS Y SIM ═════════ */
+var flips=[
+ {f:'«Los funcionarios encuentran proveedores en redes sociales.»',big:'72,69%',b:'del tráfico del portal de Colombia Compra llega por búsqueda orgánica. El canal es el buscador.',c:'Similarweb (2026a)'},
+ {f:'«Todas las entidades ya están digitalizadas.»',big:'65,47',b:'puntos promedió la política de Gobierno Digital en alcaldías (2025), frente a 82,4 en gobernaciones.',c:'Portafolio (2026)'},
+ {f:'«Hoy todo el mundo está conectado.»',big:'61,7%',b:'de las personas en centros poblados y zona rural usó internet en 2024, frente a 84,6% en cabeceras.',c:'DANE (2025)'}
+];
+var fw=$('#flips');
+flips.forEach(function(x){
+  var b=el('button','flip','<div class="flip-in"><div class="face front"><small>Creencia</small><p>'+x.f+'</p><span class="turn">Ver el dato ↻</span></div><div class="face back"><small>Dato</small><div class="big">'+x.big+'</div><p>'+x.b+'</p><span class="cite">'+x.c+'</span></div></div>');
+  b.onclick=function(){b.classList.toggle('open')};fw.appendChild(b);
+});
+var simTxt=[
+ '<b style="color:#4ADE00">Fuentes.</b> Registros internos (solicitudes, correos, CRM), inteligencia del entorno (SECOP II, Función Pública, DANE) e investigación propia (entrevistas y encuesta a funcionarios).',
+ '<b style="color:#4ADE00">Validación.</b> Cada fuente pasa por los cinco criterios de la diapositiva 03. Un hallazgo entra al plan solo si lo confirman al menos dos fuentes.',
+ '<b style="color:#4ADE00">Decisión de medios.</b> Canal, mensaje, segmento y presupuesto se eligen a partir de hallazgos validados (diapositiva 06), no de gustos del equipo.',
+ '<b style="color:#4ADE00">Medición.</b> GA4 y Search Console miden la respuesta del público; esos datos vuelven como fuente primaria y reinician el ciclo cada trimestre.'
+];
+$$('#sim .n').forEach(function(g){
+  g.addEventListener('click',function(){
+    $$('#sim .n').forEach(function(x){x.classList.remove('on')});g.classList.add('on');
+    $('#simbox').innerHTML='<p style="font-size:13.5px">'+simTxt[+g.dataset.i]+'</p>';
+  });
+});
+
+/* ═════════ 02 · CLASIFICACIÓN ═════════ */
+var items=[
+ {n:'Entrevistas a jefes de contratación y TI de alcaldías de Nariño',k:'Investigación propia',c:'p',w:'KOWEB diseña la guía y obtiene el testimonio directo: dato original sobre miedos y criterios de compra.'},
+ {n:'Encuesta digital a secretarios de despacho',k:'Investigación propia',c:'p',w:'Instrumento propio aplicado al público objetivo; permite cuantificar lo que dijeron las entrevistas.'},
+ {n:'Google Analytics 4 del sitio de KOWEB',k:'Analítica propia',c:'p',w:'Registra el comportamiento de los visitantes de KOWEB; nadie más tiene ese dato (disponible al publicar el sitio).'},
+ {n:'Solicitudes de demo y consultas recibidas',k:'Registros internos',c:'p',w:'Datos internos de la operación comercial: primer indicio real de demanda.'},
+ {n:'Datos abiertos SECOP II – Contratos electrónicos',k:'Colombia Compra Eficiente',c:'s',w:'Los produce el Estado; KOWEB los reutiliza para dimensionar qué y cuánto contratan las entidades.'},
+ {n:'Índice de Desempeño Institucional 2025 (Gobierno Digital)',k:'Función Pública',c:'s',w:'Medición oficial hecha por un tercero; muestra la brecha de madurez digital entre alcaldías y gobernaciones.'},
+ {n:'ENTIC Hogares 2024',k:'DANE',c:'s',w:'Estadística oficial sobre uso de internet; describe el entorno de conectividad del público.'},
+ {n:'Suominen (2020), comercio digital en América Latina',k:'CEPAL',c:'s',w:'Análisis de terceros basado en encuestas a empresas; aporta contexto regional, no dato de KOWEB.'},
+ {n:'Estimaciones de tráfico de SimilarWeb',k:'Herramienta privada',c:'s',w:'Datos modelados por una empresa externa sobre sitios del sector; se interpretan, no se generan.'},
+ {n:'Catálogo de conjuntos de datos de datos.gov.co',k:'Portal de datos abiertos',c:'t',w:'Es el índice que permite encontrar los datasets; el dato útil está en cada conjunto, no en el catálogo.'},
+ {n:'Redalyc y Google Académico',k:'Bases bibliográficas',c:'t',w:'Buscadores de literatura: remiten a artículos como el de Canossa (2019), que es la fuente secundaria.'},
+ {n:'Directorio de entidades públicas (SIGEP)',k:'Directorio',c:'t',w:'Lista quiénes son las entidades y sus cargos; sirve para ubicar a quién entrevistar.'}
+];
+var colNames={p:'primaria',s:'secundaria',t:'terciaria'};
+var placed={}, selected=null, pool=$('#pool');
+function renderPool(){
+  pool.innerHTML='';
+  items.forEach(function(it,i){
+    if(placed[i])return;
+    var b=el('button','chip'+(selected===i?' sel':''),'<span class="k">'+it.k+'</span>'+it.n);
+    b.onclick=function(){selected=(selected===i?null:i);renderPool();markCols()};
+    pool.appendChild(b);
+  });
+  if(!pool.children.length)pool.appendChild(el('div','card','<p style="font-size:13.5px">Todas clasificadas. Revisa la justificación de cada una en las columnas.</p>'));
+}
+function markCols(){$$('#cols .col').forEach(function(c){c.classList.toggle('ready',selected!==null)})}
+function place(i,c){
+  placed[i]=c;var it=items[i],ok=it.c===c;
+  var box=el('div','placed '+(ok?'ok':'bad'),it.n+'<span class="why">'+(ok?'':'es '+colNames[it.c]+'. ')+it.w+'</span>');
+  $('#cols .col[data-c="'+c+'"]').appendChild(box);
+  selected=null;renderPool();markCols();updScore();
+}
+function updScore(){
+  var n=Object.keys(placed).length,g=0;
+  Object.keys(placed).forEach(function(i){if(items[i].c===placed[i])g++});
+  $('#scoreTxt').textContent=n+' / 12 clasificadas · '+g+' correctas';
+}
+$$('#cols .col').forEach(function(c){c.addEventListener('click',function(){if(selected!==null)place(selected,c.dataset.c)})});
+function reset(){placed={};selected=null;$$('#cols .placed').forEach(function(p){p.remove()});renderPool();markCols();updScore()}
+$('#btnReset').onclick=reset;
+$('#btnSolve').onclick=function(){reset();items.forEach(function(it,i){place(i,it.c)})};
+renderPool();updScore();
+
+/* ═════════ 03 · EVALUACIÓN ═════════ */
+var crits=['Autoridad','Actualidad','Precisión','Propósito','Cobertura'];
+var fuentes=[
+ {n:'Datos abiertos SECOP II',s:[5,5,3,5,4],j:[
+  'Publicada por Colombia Compra Eficiente, ente rector de la contratación pública.',
+  'Se actualiza a diario desde la plataforma transaccional.',
+  'Contiene valores digitados con error: la suma de Nariño 2025 supera el presupuesto nacional.',
+  'Transparencia: no busca vender ni persuadir.',
+  'Cubre todas las entidades en SECOP II; algunas de régimen especial reportan de forma incompleta.']},
+ {n:'Función Pública · IDI 2025',s:[4,5,4,4,5],j:[
+  'Medición oficial, aunque la consulté a través de prensa: lo correcto es ir al informe original.',
+  'Resultados de la vigencia 2025, publicados en julio de 2026.',
+  'Metodología estandarizada; el puntaje es comparable entre entidades.',
+  'Se basa en el autorreporte FURAG: las entidades se califican a sí mismas.',
+  'Incluye gobernaciones y alcaldías de todo el país.']},
+ {n:'DANE · ENTIC 2024',s:[5,4,5,5,4],j:[
+  'Autoridad estadística oficial de Colombia.',
+  'Datos 2024 publicados en agosto de 2025: un año de rezago.',
+  'Muestra probabilística con error de muestreo documentado.',
+  'Estadística pública sin interés comercial.',
+  'Mide hogares y personas, no entidades: cobertura indirecta para KOWEB.']},
+ {n:'SimilarWeb',s:[3,5,2,3,3],j:[
+  'Empresa privada reconocida en inteligencia digital, pero sin auditoría pública de su método.',
+  'Datos del último mes disponible (agosto 2026).',
+  'Estimaciones por panel y modelos; en sitios de poco tráfico el error aumenta.',
+  'Modelo freemium: la versión gratuita muestra datos parciales para vender la de pago.',
+  'Buena en sitios grandes; débil o nula en sitios pequeños y nuevos.']},
+ {n:'Suominen (2020) · CEPAL',s:[5,2,4,5,3],j:[
+  'Organismo de Naciones Unidas con revisión editorial.',
+  'La encuesta es de 2018-2019: anterior a la pandemia y a la ola de digitalización.',
+  'Encuesta a más de 1.400 empresas con resultados detallados.',
+  'Diagnóstico para política pública, sin interés comercial.',
+  'Estudia exportadoras B2C y B2B, no proveedores de gobierno (B2G).']},
+ {n:'Agregador privado de licitaciones',s:[2,4,2,2,3],j:[
+  'Sitio comercial que se describe a sí mismo como «el único buscador»: afirmación no verificable.',
+  'Publica procesos recientes.',
+  'Replica datos de SECOP sin indicar fecha de corte ni método.',
+  'Busca suscriptores: el contenido está al servicio de la venta.',
+  'Cobertura incierta; no declara qué entidades incluye.']}
+];
+var fsel=0, srcs=$('#srcs');
+function totalOf(f){return f.s.reduce(function(a,b){return a+b},0)}
+function tcol(t){return t>=21?'#4ADE00':(t>=16?'#f5b400':'#ff5a4f')}
+function renderSrcs(){
+  srcs.innerHTML='';
+  fuentes.forEach(function(f,i){
+    var t=totalOf(f);
+    var b=el('button','src'+(i===fsel?' on':''),'<span>'+f.n+'</span><span class="tot" style="color:'+tcol(t)+';border:1px solid '+tcol(t)+'55">'+t+'/25</span>');
+    b.onclick=function(){fsel=i;renderSrcs();renderCrit();drawRadar()};
+    srcs.appendChild(b);
+  });
+}
+function renderCrit(){
+  var c=$('#crit'),f=fuentes[fsel];c.innerHTML='';
+  crits.forEach(function(k,i){
+    var r=el('div','crow','<label>'+k+' <b>'+f.s[i]+'</b></label><input type="range" min="1" max="5" step="1" value="'+f.s[i]+'" aria-label="'+k+'"><p>'+f.j[i]+'</p>');
+    $('input',r).addEventListener('input',function(e){f.s[i]=+e.target.value;$('b',r).textContent=f.s[i];renderSrcs();drawRadar()});
+    c.appendChild(r);
+  });
+}
+function drawRadar(){
+  var svg=$('#radar'),cx=180,cy=170,R=120,f=fuentes[fsel],h='';
+  function pt(i,v){var a=-Math.PI/2+i*2*Math.PI/5;return [cx+Math.cos(a)*R*v/5,cy+Math.sin(a)*R*v/5]}
+  for(var l=1;l<=5;l++){var p=[];for(var i=0;i<5;i++)p.push(pt(i,l).join(','));h+='<polygon points="'+p.join(' ')+'" fill="none" stroke="#262626"/>'}
+  for(var i2=0;i2<5;i2++){var e=pt(i2,5);h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+e[0]+'" y2="'+e[1]+'" stroke="#262626"/>';
+    var lp=pt(i2,6.1);h+='<text x="'+lp[0]+'" y="'+(lp[1]+4)+'" text-anchor="middle">'+crits[i2]+'</text>'}
+  var t=totalOf(f),col=tcol(t),pp=f.s.map(function(v,i){return pt(i,v).join(',')});
+  h+='<polygon points="'+pp.join(' ')+'" fill="'+col+'" fill-opacity=".18" stroke="'+col+'" stroke-width="2"/>';
+  f.s.forEach(function(v,i){var q=pt(i,v);h+='<circle cx="'+q[0]+'" cy="'+q[1]+'" r="4" fill="'+col+'"/>'});
+  h+='<text x="'+cx+'" y="'+(cy+5)+'" text-anchor="middle" style="font-family:Rajdhani,sans-serif;font-size:26px;font-weight:700;fill:'+col+'">'+t+'</text>';
+  svg.innerHTML=h;
+  var v=$('#verdict');
+  if(t>=21){v.className='verdict v-ok';v.innerHTML='<b>Fuente base</b>Puede sustentar decisiones de inversión del plan, con la validación puntual que indique su criterio más bajo.'}
+  else if(t>=16){v.className='verdict v-mid';v.innerHTML='<b>Usar con triangulación</b>Aporta contexto o tendencia, pero cada cifra se contrasta con otra fuente antes de decidir.'}
+  else{v.className='verdict v-low';v.innerHTML='<b>No es base de decisión</b>Sirve para explorar o encontrar datos, no para justificar presupuesto.'}
+}
+renderSrcs();renderCrit();drawRadar();
+
+/* ═════════ 04 · HERRAMIENTAS ═════════ */
+$$('#tabs .tab').forEach(function(t){
+  t.onclick=function(){
+    $$('#tabs .tab').forEach(function(x){x.classList.toggle('on',x===t)});
+    $$('.pane').forEach(function(p){p.classList.toggle('on',p.id==='p-'+t.dataset.p)});
+  };
+});
+var sw=[
+ {n:'Portal Colombia Compra',d:'colombiacompra.gov.co',dur:160,ppv:2.93,bounce:59.29},
+ {n:'Plataforma SECOP II',d:'community.secop.gov.co',dur:249,ppv:3.66,bounce:28.69},
+ {n:'Agregador privado',d:'licitacionescolombia.co',dur:12,ppv:1.48,bounce:50.39}
+];
+var swLbl={dur:function(v){return Math.floor(v/60)+' min '+(v%60<10?'0':'')+(v%60)+' s'},ppv:function(v){return fmt(v,2)},bounce:function(v){return fmt(v,2)+'%'}};
+function drawSW(m){
+  var box=$('#swBars'),mx=Math.max.apply(null,sw.map(function(s){return s[m]}));
+  box.innerHTML='';
+  sw.forEach(function(s,i){
+    var r=el('div','brow','<div class="lbl"><span>'+s.n+' <span class="cite">'+s.d+'</span></span><b>'+swLbl[m](s[m])+'</b></div><div class="track"><div class="fill'+(i===2?' low':(i===0?' alt':''))+'" style="width:0"></div></div>');
+    box.appendChild(r);
+    setTimeout(function(){$('.fill',r).style.width=(s[m]/mx*100)+'%'},30);
+  });
+}
+$$('#swSel button').forEach(function(b){b.onclick=function(){$$('#swSel button').forEach(function(x){x.classList.toggle('on',x===b)});drawSW(b.dataset.m)}});
+drawSW('dur');
+
+/* consulta en vivo SECOP II */
+var API='https://www.datos.gov.co/resource/jbjy-vk9h.json';
+function soql(){
+  var dep=$('#qDep').value,y=+$('#qYear').value,k=$('#qKey').value;
+  var w="departamento='"+dep+"' AND fecha_de_firma >= '"+y+"-01-01T00:00:00' AND fecha_de_firma < '"+(y+1)+"-01-01T00:00:00'";
+  if(k)w+=" AND upper(descripcion_del_proceso) like '%"+k+"%'";
+  return {select:'count(*) AS contratos, count(distinct nombre_entidad) AS entidades, sum(valor_del_contrato) AS suma, max(valor_del_contrato) AS maximo',where:w};
+}
+function showQ(){
+  var q=soql();
+  $('#qTxt').textContent='GET datos.gov.co/resource/jbjy-vk9h.json\n$select = '+q.select+'\n$where  = '+q.where;
+}
+function money(v){
+  v=+v;if(!isFinite(v))return '—';
+  if(v>=1e12)return '$'+fmt(v/1e12,1)+' billones';
+  if(v>=1e9)return '$'+fmt(v/1e9,1)+' mil M';
+  if(v>=1e6)return '$'+fmt(v/1e6,1)+' M';
+  return '$'+fmt(v);
+}
+function paint(r,live){
+  var k=$('#kpis'),susp=(+r.suma>5e14);
+  k.innerHTML='';
+  [[fmt(r.contratos),'contratos firmados'],[r.entidades!=null?fmt(r.entidades):'—','entidades contratantes'],[money(r.suma),'suma de valores reportados',susp],[money(r.maximo),'contrato de mayor valor registrado',(+r.maximo>1e12)]]
+  .forEach(function(x){if(x[0]==='—')return;k.appendChild(el('div','kpi'+(x[2]?' warn':''),'<div class="v">'+x[0]+'</div><div class="l">'+x[1]+(x[2]?' · <span style="color:#f5b400">revisar atípicos</span>':'')+'</div>'))});
+  var s=$('#qStatus');
+  s.className='status'+(live?' live':'');
+  s.textContent=live?'● Datos en vivo desde datos.gov.co · '+new Date().toLocaleString('es-CO'):'Sin conexión con la API. Se muestra la consulta de referencia (Nariño, 2025) del 28/09/2026.';
+}
+var REF={contratos:18045,entidades:null,suma:945674901281161.19,maximo:NaN};
+function run(){
+  showQ();var q=soql(),b=$('#qGo');b.disabled=true;b.textContent='Consultando…';
+  var url=API+'?$select='+encodeURIComponent(q.select)+'&$where='+encodeURIComponent(q.where);
+  var ctl=('AbortController' in window)?new AbortController():null;
+  var tm=setTimeout(function(){if(ctl)ctl.abort()},15000);
+  fetch(url,ctl?{signal:ctl.signal}:{}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})
+   .then(function(d){paint(d[0]||{contratos:0},true)})
+   .catch(function(){paint(REF,false)})
+   .then(function(){clearTimeout(tm);b.disabled=false;b.textContent='Consultar'});
+}
+['#qDep','#qYear','#qKey'].forEach(function(s){$(s).addEventListener('change',showQ)});
+$('#qGo').onclick=run;
+showQ();paint(REF,false);$('#qStatus').textContent='Referencia del 28/09/2026 (Nariño, 2025). Pulsa «Consultar» para traer datos en vivo.';
+
+/* ═════════ 05 · HALLAZGOS ═════════ */
+var g1=[['Mejor gobernación (Meta)',97.8],['Gobernación de Nariño',83.2],['Promedio gobernaciones',82.4],['Promedio alcaldías',65.47]];
+var g2=[['Cabeceras municipales',84.6],['Total nacional',79.3],['Centros poblados y rural disperso',61.7]];
+function gauges(id,arr,unit,hl){
+  var b=$(id);b.innerHTML='';
+  arr.forEach(function(x,i){
+    var r=el('div','gauge','<div class="lbl"><span>'+x[0]+'</span><b>'+fmt(x[1],x[1]%1?(String(x[1]).split('.')[1].length):0)+unit+'</b></div><div class="track"><div class="fill'+(i===hl?'':' alt')+'" style="width:0" data-w="'+x[1]+'"></div></div>');
+    b.appendChild(r);
+  });
+}
+gauges('#gauges',g1,'',3);gauges('#gauges2',g2,'%',2);
+function animGauges(){
+  $$('#gauges .fill,#gauges2 .fill').forEach(function(f){f.style.width='0'});
+  setTimeout(function(){$$('#gauges .fill,#gauges2 .fill').forEach(function(f){f.style.width=f.dataset.w+'%'})},80);
+}
+
+/* ═════════ 06 · MAPA DATO → DECISIÓN ═════════ */
+var mapa=[
+ {h:'El portal de Colombia Compra recibe 72,69% de su tráfico por búsqueda orgánica.',d:'Blog de tutoriales sobre SECOP II optimizado para buscadores como canal principal (medio propio).',k:'Tráfico orgánico y posiciones en Search Console.',x:'Fuente: Similarweb (2026a). Riesgo: es una estimación; se confirma con SEMrush y Search Console antes de escalar el presupuesto de contenidos.'},
+ {h:'SECOP II se usa a diario: 4 min 9 s por visita, 28,69% de rebote, búsquedas de acceso.',d:'Guías descargables y boletín por correo para el operador de contratación, no solo para el jefe.',k:'Descargas y suscriptores del boletín.',x:'Fuente: Similarweb (2026b). Riesgo: el operador no decide la compra; el boletín debe llegar también al secretario.'},
+ {h:'Alcaldías: 65,47 puntos en Gobierno Digital frente a 82,4 de las gobernaciones.',d:'Segmento prioritario: alcaldías de Nariño y del sur del país, con mensaje de modernización sin riesgo jurídico.',k:'Solicitudes de demo por tipo de entidad.',x:'Fuente: Portafolio (2026), con datos de Función Pública. Riesgo: índice autorreportado; se contrasta con entrevistas.'},
+ {h:'En zonas rurales solo 61,7% de las personas usa internet.',d:'Sitio liviano, rápido en conexiones lentas, con contacto por WhatsApp Business.',k:'Velocidad de carga y clics en WhatsApp (GA4).',x:'Fuente: DANE (2025). Riesgo: mide hogares, no oficinas públicas; se valida en la encuesta a municipios.'},
+ {h:'El agregador privado retiene 12 s por visita y 1,48 páginas.',d:'No pautar en agregadores de licitaciones; invertir en medio propio y ganado (casos de éxito).',k:'Costo por solicitud de demo por canal.',x:'Fuente: Similarweb (2026c). Riesgo: sitio pequeño, estimación con mayor error; se toma como señal, no como prueba.'}
+];
+var mp=$('#map');
+mapa.forEach(function(m){
+  var r=el('div','mrow','<div class="mcell"><small>Hallazgo</small>'+m.h+'</div><div class="arrow">→</div><div class="mcell"><small>Decisión de medios</small>'+m.d+'</div><div class="arrow">→</div><div class="mcell"><small>KPI</small>'+m.k+'</div><div class="mdet">'+m.x+'</div>');
+  r.setAttribute('tabindex','0');
+  r.onclick=function(){r.classList.toggle('on')};
+  r.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();r.classList.toggle('on')}};
+  mp.appendChild(r);
+});
+
+/* ═════════ 07 · METODOLOGÍA ═════════ */
+var pasos=[
+ {t:'Pregunta y objetivo',b:'¿Qué canales digitales consultan los decisores de tecnología de las alcaldías de Nariño y qué contenido los llevaría a considerar a KOWEB?',l:['Objetivo del plan: posicionar a KOWEB como proveedor confiable ante decisores B2G.','Resultado esperado: canales, mensajes y KPI priorizados con evidencia.','Unidad de análisis: alcaldías de los 64 municipios de Nariño.']},
+ {t:'Fase cualitativa',b:'Escuchar antes de medir. Entrevistas semiestructuradas para descubrir criterios de compra, miedos y hábitos digitales.',l:['8 a 10 entrevistas a jefes de contratación, TI y secretarios.','Muestreo intencional: Pasto y municipios de distinta categoría.','Guía de 12 preguntas; grabación con consentimiento y transcripción.']},
+ {t:'Fase cuantitativa',b:'Verificar si lo dicho en entrevistas se repite en el conjunto de municipios y en los datos públicos.',l:['Encuesta en línea a las 64 alcaldías (Google Forms), con recordatorio telefónico.','Consulta de SECOP II: contratos de software y plataformas 2023-2025.','SimilarWeb y SEMrush: intención de búsqueda del sector.']},
+ {t:'Validación',b:'Todo hallazgo pasa por el filtro de confiabilidad antes de convertirse en decisión.',l:['Matriz de 5 criterios: una fuente base necesita 21/25 o más.','Triangulación: cada hallazgo, confirmado por al menos dos fuentes.','Depuración de datos: exclusión de valores atípicos en SECOP II.']},
+ {t:'Análisis y decisión',b:'Convertir evidencia en plan de medios y dejar la medición lista para el siguiente ciclo.',l:['Codificación temática de entrevistas y estadística descriptiva de la encuesta.','Matriz dato → decisión → KPI (diapositiva 06).','Tablero en GA4 y revisión trimestral del plan.']}
+];
+var gantt=[['Objetivo',[1,0,0,0,0,0,0,0]],['Entrevistas',[0,1,1,1,0,0,0,0]],['Encuesta y datos',[0,0,0,1,1,1,0,0]],['Validación',[0,0,0,0,0,1,1,0]],['Análisis y plan',[0,0,0,0,0,0,1,1]]];
+var ps=0,stp=$('#steps');
+pasos.forEach(function(p,i){var b=el('button','step','<div class="c">0'+(i+1)+'</div><span>'+p.t+'</span>');b.onclick=function(){setStep(i)};stp.appendChild(b)});
+var gt=$('#gantt');
+gantt.forEach(function(g){var r=el('div','g','<span>'+g[0]+'</span><div class="t">'+g[1].map(function(x){return '<i class="'+(x?'x':'')+'"></i>'}).join('')+'</div>');gt.appendChild(r)});
+gt.appendChild(el('div','g','<span></span><div class="t" style="font-family:Space Mono,monospace;font-size:9px;color:#666">'+[1,2,3,4,5,6,7,8].map(function(n){return '<span style="text-align:center">S'+n+'</span>'}).join('')+'</div>'));
+function setStep(i){
+  ps=i;
+  $$('#steps .step').forEach(function(s,k){s.classList.toggle('on',k===i);s.classList.toggle('done',k<i)});
+  var p=pasos[i];
+  $('#stepBox').innerHTML='<div class="eyebrow" style="margin-bottom:8px">Paso 0'+(i+1)+' de 05</div><h3>'+p.t+'</h3><p style="font-size:14px">'+p.b+'</p><ul>'+p.l.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+
+   '<div style="display:flex;gap:8px;margin-top:16px"><button class="ibtn" id="sPrev"'+(i===0?' disabled':'')+'>← ANTERIOR</button><button class="ibtn" id="sNext"'+(i===4?' disabled':'')+'>SIGUIENTE →</button></div>';
+  $('#sPrev').onclick=function(){if(ps>0)setStep(ps-1)};
+  $('#sNext').onclick=function(){if(ps<4)setStep(ps+1)};
+  var map={0:[0],1:[1],2:[2],3:[3],4:[4]};
+  $$('#gantt .g').forEach(function(g,k){g.classList.toggle('hl',map[i].indexOf(k)>-1)});
+}
+setStep(0);
+
+/* ═════════ INICIO ═════════ */
+var h=parseInt((location.hash||'').slice(1),10);
+go(isNaN(h)?0:Math.min(Math.max(h,0),total-1));
+})();
+</script>
+</body>
+</html>
